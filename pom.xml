@@ -16,6 +16,13 @@
     </dependency>
   </dependencies>
   <build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.4.0</version> <!-- Use 3.3.1 or newer -->
+        </plugin>
+    </plugins>
     <finalName>java-demo-app</finalName>
   </build>
 </project>
