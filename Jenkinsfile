@@ -29,6 +29,12 @@ pipeline {
 	    }
         }
 	}
+	stage('Build docker image') {
+            steps {
+                sh 'docker image build -t registry.local/java-app:v1 .'
+            }
+        }
+
        stage('PushImage') {
             steps {
                 echo 'Push image to registry'
