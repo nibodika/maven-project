@@ -28,6 +28,7 @@ pipeline {
             archiveArtifacts artifacts: '**/**/*.war', followSymlinks: false
 	    }
         }
+	}
        stage('PushImage') {
             steps {
                 echo 'Push image to registry'
