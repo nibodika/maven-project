@@ -23,6 +23,10 @@ pipeline {
                 echo 'BuildApp'
 		sh 'mvn package -f pom.xml'
             }
+	    post{
+	    success{
+            archiveArtifacts artifacts: '**/**/*.war', followSymlinks: false
+	    }
         }
        stage('PushImage') {
             steps {
