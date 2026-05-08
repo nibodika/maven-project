@@ -4,12 +4,13 @@ pipeline {
         stage('Compile') {
             steps {
                 echo 'Compiling Code'
-		sh 'mvn compile -f pom.xml'
+		sh 'mvn install -DskipTests -f pom.xml'
             }
         }
         stage('UnitTest') {
             steps {
                 echo 'Unit Test'
+		sh 'mvn test -f pom.xml'
             }
         }
         stage('Security Scan') {
@@ -17,14 +18,10 @@ pipeline {
                 echo 'Scan Vulnerability'
             }
         }
-        stage('QualityGate') {
+        stage('BuildApp') {
             steps {
-                echo 'QGate'
-            }
-        }
-        stage('CreateImage') {
-            steps {
-                echo 'Creating docker image'
+                echo 'BuildApp'
+		sh 'mvn package -f pom.xml'
             }
         }
        stage('PushImage') {
