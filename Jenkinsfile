@@ -31,7 +31,7 @@ pipeline {
 	}
 	stage('Build docker image') {
             steps {
-                sh 'docker image build -t registry.local/java-app:v1 .'
+                sh 'docker image build -t registry.local/java-app:$BUILD_NUMBER .'
             }
         }
 
@@ -40,6 +40,17 @@ pipeline {
                 echo 'Push image to registry'
             }
         } 
+
+	stage('Deploy to Stagging Env') {
+            steps {
+                echo 'Running app on stagging env'
+		sh '''
+		docker stop tomcatInstanceStaging || true
+		docker rm tomcatInstanceStaging || true
+	docker run -itd --name tomcatInstanceStaging -p 8083:8080 registry.local/java-app:$BUILD_NUMBER
+	sh '''
+            }
+        }
     }
 }
 
