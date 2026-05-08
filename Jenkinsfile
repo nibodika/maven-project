@@ -51,6 +51,22 @@ pipeline {
 	sh '''
             }
         }
+	
+	stage('Deploy Production Environment'){
+	steps{
+	timeout(time:1, unit:'DAYS'){
+	input message: 'Approve PRODUCTION Deployment?'
+	}
+	echo "Running app on Prod env"
+	sh '''
+	docker stop tomcatInstanceProd || true
+        docker rm tomcatInstanceProd || true
+        docker run -itd --name tomcatInstanceProd -p 8084:8080 registry.local/java-app:$BUILD_NUMBER
+        sh '''
+       }
+      
+      }
+
     }
 }
 
