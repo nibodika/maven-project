@@ -1,12 +1,36 @@
 pipeline {
     agent any
-
     stages {
-        stage('Hello') {
+        stage('Compile') {
             steps {
-                echo 'Hello World'
+                echo 'Compiling Code'
             }
         }
+        stage('UnitTest') {
+            steps {
+                echo 'Unit Test'
+            }
+        }
+        stage('Security Scan') {
+            steps {
+                echo 'Scan Vulnerability'
+            }
+        }
+        stage('QualityGate') {
+            steps {
+                echo 'QGate'
+            }
+        }
+        stage('CreateImage') {
+            steps {
+                echo 'Creating docker image'
+            }
+        }
+       stage('PushImage') {
+            steps {
+                echo 'Push image to registry'
+            }
+        } 
     }
 }
 
