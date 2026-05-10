@@ -66,7 +66,19 @@ pipeline {
        }
       
       }
+     
+     post{
+     always{
+        echo 'We are in post always'
+        }
+     success{
+        echo 'We are in post success'
+        }
+     failure{
+        echo 'We are in post failure'
+	}
+   }
 
-    }
+ }
+
 }
-
