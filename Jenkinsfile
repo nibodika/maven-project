@@ -73,10 +73,28 @@ pipeline {
         echo 'We are in post always'
         }
      success{
-        echo 'We are in post success'
+         mail bcc: '', body: """Hi Team,
+
+         Build #$BUILD_NUMBER is successful, please go through the url
+
+         $BUILD_URL
+
+         and verify the details.
+
+         Regards,
+         DevOps Team""", cc: '', from: '', replyTo: '', subject: 'BUILD SUCCESS NOTIFICATION', to: 'manarola09@gmail.com'
         }
      failure{
-        echo 'We are in post failure'
+         mail bcc: '', body: """Hi Team,
+            
+         Build #$BUILD_NUMBER is unsuccessful, please go through the url
+
+         $BUILD_URL
+
+         and verify the details.
+
+         Regards,
+         DevOps Team""", cc: '', from: '', replyTo: '', subject: 'BUILD FAILED NOTIFICATION', to: 'manarola09@gmail.com' 
 	}
    }
 
